@@ -36,7 +36,7 @@ jobs:
 
       - name: Prepare for installer creation
         run: |
-          mkdir -Force build\windows\installer
+          mkdir -Force windows\build\windows\installer
 
       - name: Create installer with Inno Setup
         run: |
@@ -46,5 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pinboard-app-windows
-          path: build/windows/installer/pinboard_app_setup.exe
+          path: windows/build/windows/installer/pinboard_app_setup.exe
           retention-days: 7
