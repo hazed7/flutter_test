@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -29,13 +29,17 @@ jobs:
       - name: Build Windows executable
         run: flutter build windows --release
 
+      - name: Download Inno Setup
+        run: |
+          Invoke-WebRequest -Uri "https://files.jrsoftware.org/is/6/innosetup-6.2.2.exe" -OutFile "innosetup-installer.exe"
+          Start-Process -FilePath "innosetup-installer.exe" -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-" -Wait
+
       - name: Create installer with Inno Setup
-        uses: joncloud/inno-setup-action@v4
-        with:
-          script-path: windows/inno_setup.iss
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows/inno_setup.iss
 
       - name: Upload Windows installer
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pinboard-app-windows
           path: build/windows/installer/pinboard_app_setup.exe
