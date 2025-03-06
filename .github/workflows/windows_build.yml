@@ -38,6 +38,9 @@ jobs:
         run: |
           mkdir -Force build\windows\installer
 
+      - name: Вывести структуру каталогов
+        run: tree . /F /A
+
       - name: Create installer with Inno Setup
         run: |
           & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows/inno_setup.iss
