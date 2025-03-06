@@ -34,6 +34,10 @@ jobs:
           Invoke-WebRequest -Uri "https://files.jrsoftware.org/is/6/innosetup-6.2.2.exe" -OutFile "innosetup-installer.exe"
           Start-Process -FilePath "innosetup-installer.exe" -ArgumentList "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-" -Wait
 
+      - name: Prepare for installer creation
+        run: |
+          mkdir -Force build\windows\installer
+
       - name: Create installer with Inno Setup
         run: |
           & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows/inno_setup.iss
