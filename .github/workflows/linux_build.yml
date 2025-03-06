@@ -40,7 +40,6 @@ jobs:
           mkdir -p packaging/linux/debian/DEBIAN
           mkdir -p packaging/linux/debian/usr/local/bin
           mkdir -p packaging/linux/debian/usr/share/applications
-          mkdir -p packaging/linux/debian/usr/share/icons/hicolor/512x512/apps
 
           # Copy executable
           cp -r build/linux/x64/release/bundle/* packaging/linux/debian/usr/local/bin/
@@ -51,14 +50,10 @@ jobs:
           Name=Pinboard App
           Comment=A modern pinboard application
           Exec=/usr/local/bin/pinboard_app
-          Icon=pinboard-app
           Terminal=false
           Type=Application
           Categories=Utility;
           EOF
-
-          # Copy icon
-          cp assets/icon/app_icon.png packaging/linux/debian/usr/share/icons/hicolor/512x512/apps/pinboard-app.png
 
           # Create control file
           cat > packaging/linux/debian/DEBIAN/control << EOF
